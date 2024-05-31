@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quem está de plantão</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            font-size: 2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="plantao"></h1>
+    <script>
+        function getCurrentDuty() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1; // getMonth is zero-indexed
+            const day = now.getDate();
+            const hour = now.getHours();
+
+            if (month === 6) {
+                if (day >= 1 && day <= 7 && hour < 19) {
+                    return 'Dra Liliana';
+                } else if ((day === 7 && hour >= 19) || (day > 7 && day < 17) || (day === 17 && hour < 19)) {
+                    return 'Dr. Leopoldo';
+                } else if (day >= 17 && day < 24) {
+                    return 'Dr. Jean';
+                } else if (day >= 24) {
+                    return 'Dra Liliana';
+                }
+            } else if (month === 7) {
+                if (day <= 1) {
+                    return 'Dra Liliana';
+                }
+            }
+            return 'Nenhum plantão disponível';
+        }
+
+        document.getElementById('plantao').innerText = getCurrentDuty();
+    </script>
+</body>
+</html>
